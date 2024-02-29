@@ -13,17 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+        Schema::create('Team_tb', function (Blueprint $table) {
+            $table->string('team_id',20);
+            $table->string('team_name',50)->nullable();
+            $table->string('department_id',20);
             $table->timestamps();
+            $table->foreign('department_id')->references('department_id')->on('Department_tb')->onUpdate('restrict')->onDelete('cascade');
         });
     }
-
     /**
      * Reverse the migrations.
      *
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('Team_tb');
     }
 };
