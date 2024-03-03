@@ -12,10 +12,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/',[mainController::class,'index']);
 Route::prefix('team')->group( function(){
-    Route::get('/home',[mainController::class,'index']);
     Route::post('/create',[mainController::class,'create']);
-    Route::post('/update/{$id}',[mainController::class,'update']);
-    Route::delete('/delete/{$id}',[mainController::class,'delete']);
+    Route::post('/update/{id}',[mainController::class,'update']);
+    Route::delete('/delete/{id}',[mainController::class,'delete']);
+    Route::get('/find/{id}',[mainController::class,'find']);
 });

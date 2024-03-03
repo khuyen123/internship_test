@@ -23,5 +23,7 @@ class BaseService
     public function delete($id){
         return $this->baseRepository->delete($id);
     }
-    
+    public function getDepartments(){
+        return $this->baseRepository->getDepartments();
+    }
 }

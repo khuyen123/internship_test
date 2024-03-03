@@ -11,7 +11,7 @@ class Team extends Model
         'department_id'
     ];
     protected $table = 'Team_tb';
-    public function team(){
+    public function department(){
         return $this->hasOne(Department::class,'department_id','department_id');
     }
 }

@@ -13,7 +13,7 @@ class BaseRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class BaseRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'team_id'=>'required|max:20',
+            'department_id'=>'required',
+            'team_name'=>'max:50'
         ];
     }
+    
 }

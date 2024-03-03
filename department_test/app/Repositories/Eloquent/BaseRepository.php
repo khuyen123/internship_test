@@ -1,6 +1,7 @@
 <?php
 namespace App\Repositories\Eloquent;
 use App\Models\Team;
+use App\Models\Department;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\BaseRepositoryInterface;
 class BaseRepository implements BaseRepositoryInterface
@@ -9,7 +10,7 @@ class BaseRepository implements BaseRepositoryInterface
         return Team::all();
     }
     public function find($id){
-        $team = Team::where('team_id',$id)->get();
+        $team = Team::where('team_id',$id)->first();
         return $team;
     }
     public function create($data){
@@ -42,5 +43,9 @@ class BaseRepository implements BaseRepositoryInterface
         } catch (\Throwable $th) {
             return false;
         }
+    }
+    public function getDepartments(){
+        $departments = Department::all();
+        return $departments;
     }
 }

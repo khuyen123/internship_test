@@ -6,33 +6,57 @@ use Illuminate\Http\Request;
 use App\Http\Requests\BaseRequest;
 class mainController extends Controller
 {
-    protected $baseSevice;
-    public function __construct(BaseService $baseSevice){
-        $this->baseSevice = $baseSevice;
+    protected $baseService;
+    public function __construct(BaseService $baseService){
+        $this->baseService = $baseService;
     }
     public function index(){
-        dd($this->baseSevice->getAll());
+        $teams = $this->baseService->getAll();
+        $departments = $this->baseService->getDepartments();
+        return view('index',[
+            'teams'=>$teams,
+            'departments'=>$departments
+        ]);
     }
-    public function find(BaseRequest $request)
+    public function find($id)
     {
-        dd($this->baseSevice->find($request->team_id));
+        $team = $this->baseService->find($id);
+        return response()->json([
+            'team'=>$team
+        ]);
+      
     }
     public function create(BaseRequest $request){
-        $data = $request->input();
-        if ($this->baseSevice->create($data)) {
-            echo "Thanh Cong";
-        } else {echo "That Bai";}
+        
+        if ($this->baseService->create($request)) {
+            return response()->json([
+                'status'=>200
+            ]);
+        }
+        return response()->json([
+            'status'=>404
+        ]);
     }
     public function update($id,BaseRequest $request){
-        $data = $request->input();
-        if ($this->baseSevice->update('rec',$data)) {
-            echo "Thanh Cong";
-        } else {echo "That Bai";}
+        
+        if ($this->baseService->update($id,$request)) {
+            return response()->json([
+                'status'=>200
+            ]);
+        } 
+        return response()->json([
+            'status'=>404
+        ]);
     }
     public function delete($id){
-        if ($this->baseSevice->delete('net')) {
-            echo "Thanh Cong";
-        } else {echo "That bai";}
+        if ($this->baseService->delete($id)) {
+            return response()->json([
+                'status' => 200
+            ]);
+        }
+        return response()->json([
+            'status'=>404
+        ]);
     }
     
 }
