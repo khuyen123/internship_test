@@ -14,10 +14,32 @@
                     <table style='border:solid 0.5px;margin-left:20px' >
                         <tr>
                             <h3 style='text-align:center'>Danh sách Team</h3>
+                            <div style='display:flex' >
+                                <button onclick="gohome()" type='button' style='border:solid 1px black;margin:0 0 10px 20px; height:24px;width:40px;background-color:#57d0eb'>
+                                    <i class='fa fa-home' ></i>
+                                </button>
+                                <input style='margin-left:20px;margin-bottom:10px' type="radio" id="azsort" name="azsort" value="azsort">
+                                <label style='margin-top:4px' for="azsort">A-Z</label>
+                                <input style='margin-left:20px;margin-bottom:10px' type="radio" id="zasort" name="azsort" value="azsort">
+                                <label style='margin-top:4px' for="zasort">Z-A</label>
+                                <form action="{{route('search')}}" method = "GET">
+                                    <input style='border:solid 1px black;margin:0 0 10px 25px;width:130px; height:20px'
+                                    type="text" placeholder='Nhập từ khoá' id='searchString' name='searchString'>
+                                    <button  type='submit' style='border:solid 1px black;margin:0 0 10px 20px; height:24px;width:40px;background-color:#57d0eb'>
+                                        <i class='fa fa-search' ></i>
+                                    </button>
+                                    @csrf
+                                </form>
+                               <a href="/team/export">
+                               <button type='button' style='border:solid 1px black;margin:0 0 10px 20px; height:24px;width:40px;background-color:#57d0eb'>
+                                        <i class='fa fa-download' ></i>
+                                </button>
+                               </a>
+                            </div>
                         </tr>
                         <tr style='background-color:#689fe8' >
-                            <td style='width:70px'>Mã Team</td>
-                            <td style='width:150px' >Tên Team</td>
+                            <td onclick="sortID()" style='width:70px'>Mã Team</td>
+                            <td onclick="sortName()" style='width:150px' >Tên Team</td>
                             <td style='width:150px'>Tên Bộ Phận</td>
                             <td style='width:70px' >Chọn</td>
                         </tr>
@@ -26,7 +48,11 @@
                             <td>{{$team->team_id}}</td>
                             <td>{{$team->team_name}}</td>
                             <td>{{$team->department->department_name}}</td>
-                            <td><button onclick="selectTeam('{{$team->team_id}}')" style='background-color:#57d0eb'><i style='font: size 20px;' class="fa fa-info-circle" ></i></button></td>
+                            <td>
+                                <button onclick="selectTeam('{{$team->team_id}}')" style='background-color:#57d0eb'>
+                                    <i style='font: size 20px;' class="fa fa-info-circle" ></i>
+                                </button>
+                            </td>
                         </tr>
                         @endforeach
                     </table>
@@ -38,8 +64,7 @@
                         <div style='width: 360px;height:400px; margin:10px 0 0 20px; padding-top:20px' >
                             <div style='width: 320px; height:80px; margin-left:20px;display:flex'>
                                 <h4>Mã Team:</h4>
-                                <input readonly id='team_id' name='team_id' style='border:solid 1px black;width:200px;height:30px;margin-left:20px;margin-top:15px' type="text" placeholder='Nhập mã team'/>
-                                
+                                <input readonly id='team_id' name='team_id' style='border:solid 1px black;width:200px;height:30px;margin-left:20px;margin-top:15px' type="text" placeholder='Nhập mã team'/>       
                             </div>
                             <div style='width: 320px; height:80px; margin-left:20px; display:flex'>
                                 <h4 >Tên team:</h4>
@@ -76,7 +101,11 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        // varible 'buttonfunction' to see what the add buttom do.
+        //Go home:
+        function gohome(){
+            location.href = '/'
+        }
+        // varible 'buttonfunction' to see what the 'add' buttom do.
         // 0 - to add a new team
         // 1 - submit to add a new team
         // 2 - submit to edit a selected team
@@ -134,7 +163,6 @@
                         document.getElementById("addButton").disabled = true
                         document.getElementById("team_name").style.borderColor = "red"
                     }
-                    
                 })
             if (buttonfunction == 1) {
                 //submit to add a new team to database
@@ -300,6 +328,29 @@
             document.getElementById("team_id").style.borderColor = "black"
             document.getElementById("team_name").style.borderColor = "black"
             buttonfunction = 0
+        }
+        function sortID(){
+            var sortaz = document.getElementById('azsort').checked
+            var sortza = document.getElementById('zasort').checked
+            
+            //check to see which sort is checked
+            if (sortaz) {
+                location.href = '/team/sortIdaz'
+            }
+            if (sortza) {
+                location.href= '/team/sortIdza'
+            }  
+        }
+        function sortName(){
+            var sortaz = document.getElementById('azsort').checked
+            var sortza = document.getElementById('zasort').checked
+            //check to see which sort is checked
+            if (sortaz) {
+                location.href = '/team/sortNameaz'
+            }
+            if (sortza) {
+                location.href= '/team/sortNameza'
+            }  
         }
     </script>
 </html>

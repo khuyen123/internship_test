@@ -18,4 +18,10 @@ Route::prefix('team')->group( function(){
     Route::post('/update/{id}',[mainController::class,'update']);
     Route::delete('/delete/{id}',[mainController::class,'delete']);
     Route::get('/find/{id}',[mainController::class,'find']);
+    Route::get('/search',[mainController::class,'search'])->name('search');
+    Route::get('/export',[mainController::class,'export']);
+    Route::get('/sortIdaz',[mainController::class,'sortIdaz']);
+    Route::get('/sortIdza',[mainController::class,'sortIdza']);
+    Route::get('/sortNameaz',[mainController::class,'sortNameaz']);
+    Route::get('/sortNameza',[mainController::class,'sortNameza']);
 });

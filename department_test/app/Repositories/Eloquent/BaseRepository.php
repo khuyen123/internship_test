@@ -48,4 +48,25 @@ class BaseRepository implements BaseRepositoryInterface
         $departments = Department::all();
         return $departments;
     }
+    public function search($searchString){
+        $teams = Team::query()
+        ->where('team_name','LIKE',"%{$searchString}%")->get();
+        return $teams;
+    }
+    public function sortIdaz() {
+        $teams = Team::get()->sortBy('team_id')->all();
+        return $teams;
+    }
+    public function sortIdza(){
+        $teams = Team::get()->sortByDesc('team_id')->all();
+        return $teams;
+    }
+    public function sortNameaz(){
+        $teams = Team::get()->sortBy('team_name')->all();
+        return $teams;
+    }
+    public function sortNameza(){
+        $teams = Team::get()->sortByDesc('team_name')->all();
+        return $teams;
+    }
 }

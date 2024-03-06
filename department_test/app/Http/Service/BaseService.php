@@ -26,4 +26,19 @@ class BaseService
     public function getDepartments(){
         return $this->baseRepository->getDepartments();
     }
+    public function search($searchString){
+        return $this->baseRepository->search($searchString);
+    }
+    public function sortIdaz(){
+        return $this->baseRepository->sortIdaz();
+    }
+    public function sortIdza(){
+        return $this->baseRepository->sortIdza();
+    }
+    public function sortNameaz(){
+        return $this->baseRepository->sortNameaz();
+    }
+    public function sortNameza(){
+        return $this->baseRepository->sortNameza();
+    }
 }
