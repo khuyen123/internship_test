@@ -329,6 +329,7 @@
             document.getElementById("team_name").style.borderColor = "black"
             buttonfunction = 0
         }
+        //Sort By Team_id
         function sortID(){
             var sortaz = document.getElementById('azsort').checked
             var sortza = document.getElementById('zasort').checked
@@ -341,6 +342,7 @@
                 location.href= '/team/sortIdza'
             }  
         }
+        //Sort By Team_name
         function sortName(){
             var sortaz = document.getElementById('azsort').checked
             var sortza = document.getElementById('zasort').checked
