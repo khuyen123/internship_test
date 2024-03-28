@@ -111,4 +111,8 @@ class mainController extends Controller
             'departments'=>$departments
         ]);
     }
+    public function getAll(){
+        $teams = $this->baseService->getAll();
+        return response()->json([$teams,200]);
+    }
 }
